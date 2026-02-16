@@ -1,4 +1,4 @@
-# PiRacer Luxury Sports Dashboard 🏎️
+# PiRacer Luxury Sports Dashboard
 
 Luxury sports car style dashboard system for PiRacer
 
@@ -8,21 +8,21 @@ Luxury sports car style dashboard system for PiRacer
 ![Python](https://img.shields.io/badge/Python-3.9%2B-yellow)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-## 📋 Project Overview
+## Project Overview
 
 Real-time dashboard system for PiRacer autonomous vehicle. Luxury sports car style UI inspired by Porsche 911 / BMW M Series, intuitively displaying speed, RPM, battery level, and more.
 
 ### Key Features
 
-- 🎯 **Central Speedometer**: Hybrid analog needle + digital numbers
-- 📊 **Wheel RPM**: Real-time rotation speed display
-- 🔋 **Battery Monitoring**: Voltage and percentage display (color-coded)
-- ⏱️ **Drive Time**: Real-time timer
-- 🏆 **Max Speed Record**: Session maximum value save and reset
-- 🔄 **Direction Display**: Forward/Reverse indicator (future implementation)
-- 🎨 **Premium UI**: 60 FPS smooth animations
+- **Central Speedometer**: Hybrid analog needle + digital numbers
+- **Wheel RPM**: Real-time rotation speed display
+- **Battery Monitoring**: Voltage and percentage display (color-coded)
+- **Drive Time**: Real-time timer
+- **Max Speed Record**: Session maximum value save and reset
+- **Direction Display**: Forward/Reverse indicator (future implementation)
+- **Premium UI**: 60 FPS smooth animations
 
-## 🖥️ System Requirements
+## System Requirements
 
 ### Hardware
 - **Raspberry Pi 4** (4GB RAM recommended)
@@ -36,7 +36,7 @@ Real-time dashboard system for PiRacer autonomous vehicle. Luxury sports car sty
 - Python 3.9+
 - piracer-py library
 
-## 📐 Screen Layout
+## Screen Layout
 
 ```
 ┌────────────────────────────────────────────────────────────┐
@@ -55,7 +55,7 @@ Real-time dashboard system for PiRacer autonomous vehicle. Luxury sports car sty
 └────────────────────────────────────────────────────────────┘
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone Repository and Navigate
 ```bash
@@ -103,7 +103,7 @@ sudo usermod -a -G dialout $USER
 3. Configure Project
 4. Build and Run
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Dashboard/
@@ -133,7 +133,7 @@ Dashboard/
 └── tests/                  # Test code
 ```
 
-## 📊 Data Flow
+## Data Flow
 
 ```
 Arduino (LM393) ──Serial──> Qt Dashboard ──┬──> Speedometer
@@ -144,7 +144,7 @@ PiRacer Library ──Python──> Qt Dashboard ──┬──> Battery
                                            └──> Direction
 ```
 
-## ⚙️ Configuration and Calibration
+## Configuration and Calibration
 
 ### calibration.json Example
 
@@ -177,7 +177,7 @@ PiRacer Library ──Python──> Qt Dashboard ──┬──> Battery
 
 See `docs/IMPLEMENTATION_PLAN.md` for details
 
-## 🎨 Design Style
+## Design Style
 
 - **Color Palette**:
   - Background: `#0A0E1A` (Deep navy)
@@ -195,7 +195,7 @@ See `docs/IMPLEMENTATION_PLAN.md` for details
   - 200ms Ease-out needle rotation
   - Blink effect on new record
 
-## 🧪 Testing
+## Testing
 
 ### Unit Test Execution
 ```bash
@@ -209,7 +209,7 @@ ctest --verbose
 
 See `docs/VERIFICATION_PLAN.md` for detailed test plan
 
-## 📈 Performance Goals
+## Performance Goals
 
 - **FPS**: ≥ 55 (average)
 - **CPU Usage**: < 20%
@@ -217,13 +217,13 @@ See `docs/VERIFICATION_PLAN.md` for detailed test plan
 - **Response Delay**: < 50ms (buttons)
 - **Accuracy**: ±5% (speed), ±10% (RPM)
 
-## 🐛 Known Limitations
+## Known Limitations
 
 - Direction detection: Currently fixed value (future: PWM signal reading)
 - Temperature sensor: None (can substitute with CPU temp)
 - Gear display: PiRacer has single speed (forward/reverse only)
 
-## 🗺️ Roadmap
+## Roadmap
 
 ### Phase 1 (Current) - Basic Features
 - [x] Hardware analysis
@@ -242,28 +242,28 @@ See `docs/VERIFICATION_PLAN.md` for detailed test plan
 - [ ] Automatic direction detection
 - [ ] Graph (speed change trend)
 
-## 📚 Documentation
+## Documentation
 
 - [Hardware Analysis](docs/HARDWARE_ANALYSIS.md): PiRacer hardware constraints and feasibility review
 - [Feature Specification](docs/SPECIFICATION.md): Detailed feature and UI specification
 - [Implementation Plan](docs/IMPLEMENTATION_PLAN.md): Step-by-step implementation plan and schedule
 - [Verification Plan](docs/VERIFICATION_PLAN.md): Test scenarios and verification criteria
 
-## 🤝 Contributing
+## Contributing
 
 Issues and pull requests are welcome!
 
-## 📄 License
+## License
 
 MIT License - See [LICENSE](LICENSE) file for details
 
-## 👤 Developer
+## Developer
 
 **Ahn Hyunjun**
 - GitHub: [@your-github](https://github.com/your-github)
 - Email: your-email@example.com
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Qt Framework
 - PiRacer Community
@@ -271,6 +271,6 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ---
 
-**⚠️ Warning**: This project is created for educational and development purposes. Do not use for actual road driving.
+**Warning**: This project is created for educational and development purposes. Do not use for actual road driving.
 
-**📅 Last Updated**: 2026-02-16
+**Last Updated**: 2026-02-16
