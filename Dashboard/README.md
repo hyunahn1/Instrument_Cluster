@@ -1,4 +1,4 @@
-# PiRacer Luxury Sports Dashboard
+# Instrument Cluster Dashboard
 
 Luxury sports car style dashboard system for PiRacer
 
