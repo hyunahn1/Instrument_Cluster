@@ -253,16 +253,6 @@ See `docs/VERIFICATION_PLAN.md` for detailed test plan
 
 Issues and pull requests are welcome!
 
-## License
-
-MIT License - See [LICENSE](LICENSE) file for details
-
-## Developer
-
-**Ahn Hyunjun**
-- GitHub: [@your-github](https://github.com/your-github)
-- Email: your-email@example.com
-
 ## Acknowledgments
 
 - Qt Framework
@@ -271,6 +261,6 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ---
 
-**Warning**: This project is created for educational and development purposes. Do not use for actual road driving.
+**conf**: This project is created for educational and development purposes.
 
 **Last Updated**: 2026-02-16
