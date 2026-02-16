@@ -1,0 +1,9 @@
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/PiRacerDashboard.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/edit_cache.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/rebuild_cache.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/list_install_components.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/install.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/install/local.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/install/strip.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/PiRacerDashboard_autogen_timestamp_deps.dir
+/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/PiRacerDashboard_autogen.dir

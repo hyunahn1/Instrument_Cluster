@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "/home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen",
+	"CMAKE_BINARY_DIR" : "/home/seame2026/piracer/Dashboard/build-rpi",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/seame2026/piracer/Dashboard/build-rpi",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/seame2026/piracer/Dashboard",
+	"CMAKE_SOURCE_DIR" : "/home/seame2026/piracer/Dashboard",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Unix Makefiles",
+	"INCLUDE_DIR" : "/home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen/include",
+	"INPUTS" : [],
+	"LOCK_FILE" : "/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/PiRacerDashboard_autogen.dir/AutoRcc_dashboard_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "dashboard" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_dashboard.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/seame2026/piracer/Dashboard/build-rpi/CMakeFiles/PiRacerDashboard_autogen.dir/AutoRcc_dashboard_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "/home/seame2026/piracer/Dashboard/resources/dashboard.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

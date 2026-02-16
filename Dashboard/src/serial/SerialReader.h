@@ -9,16 +9,16 @@
 #define SERIALREADER_H
 
 #include <QObject>
-#include <QSerialPort>
 #include <QTimer>
+#include <QSocketNotifier>
 
 /**
  * @class SerialReader
- * @brief Reads speed data from Arduino via serial port
+ * @brief Reads speed data from can0 (SocketCAN)
  * 
  * Features:
- * - Auto-detect Arduino port
- * - Parse speed data (pulse/s)
+ * - Read raw CAN frames from can0
+ * - Parse speed data from CAN ID 0x123
  * - Auto-reconnection on disconnect
  */
 class SerialReader : public QObject
@@ -30,25 +30,25 @@ public:
     ~SerialReader();
     
     bool isConnected() const;
-    QString currentPort() const;
+    QString currentPort() const;  // kept for compatibility, returns "can0" when connected
     
 signals:
     void speedDataReceived(float pulsePerSec);
     void connectionStatusChanged(bool connected);
     
 private slots:
-    void onReadyRead();
-    void onErrorOccurred(QSerialPort::SerialPortError error);
+    void onCanReadyRead();
     void attemptReconnect();
     
 private:
-    bool connectToArduino();
-    QString findArduinoPort();
-    void parseData(const QString &line);
+    bool connectToCan();
+    void closeCan();
     
-    QSerialPort *m_serialPort;
+    static constexpr quint32 SPEED_CAN_ID = 0x123;
+
+    int m_canSocket;
+    QSocketNotifier *m_canNotifier;
     QTimer *m_reconnectTimer;
-    QString m_buffer;
     bool m_isConnected;
 };
 

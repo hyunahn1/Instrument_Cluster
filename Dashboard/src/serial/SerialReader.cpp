@@ -6,41 +6,38 @@
  */
 
 #include "SerialReader.h"
-#include <QSerialPortInfo>
-#include <QRegularExpression>
 #include <QDebug>
+#include <cstring>
+
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <net/if.h>
+#include <linux/can.h>
+#include <linux/can/raw.h>
 
 SerialReader::SerialReader(QObject *parent)
     : QObject(parent)
-    , m_serialPort(nullptr)
+    , m_canSocket(-1)
+    , m_canNotifier(nullptr)
     , m_reconnectTimer(nullptr)
     , m_isConnected(false)
 {
-    m_serialPort = new QSerialPort(this);
-    
-    // Connect signals
-    connect(m_serialPort, &QSerialPort::readyRead,
-            this, &SerialReader::onReadyRead);
-    connect(m_serialPort, &QSerialPort::errorOccurred,
-            this, &SerialReader::onErrorOccurred);
-    
     // Setup reconnect timer
     m_reconnectTimer = new QTimer(this);
     connect(m_reconnectTimer, &QTimer::timeout,
             this, &SerialReader::attemptReconnect);
     
-    // Try to connect
-    if (!connectToArduino()) {
-        qWarning() << "Arduino not found. Will retry every 5 seconds...";
-        m_reconnectTimer->start(5000);
+    // Try to connect can0
+    if (!connectToCan()) {
+        qWarning() << "can0 not available. Will retry every 2 seconds...";
+        m_reconnectTimer->start(2000);
     }
 }
 
 SerialReader::~SerialReader()
 {
-    if (m_serialPort->isOpen()) {
-        m_serialPort->close();
-    }
+    closeCan();
 }
 
 bool SerialReader::isConnected() const
@@ -50,116 +47,89 @@ bool SerialReader::isConnected() const
 
 QString SerialReader::currentPort() const
 {
-    return m_serialPort->portName();
+    return m_isConnected ? QStringLiteral("can0") : QString();
 }
 
-bool SerialReader::connectToArduino()
+bool SerialReader::connectToCan()
 {
-    QString portName = findArduinoPort();
-    if (portName.isEmpty()) {
+    closeCan();
+
+    m_canSocket = ::socket(PF_CAN, SOCK_RAW, CAN_RAW);
+    if (m_canSocket < 0) {
+        qWarning() << "Failed to create CAN socket";
         return false;
     }
-    
-    m_serialPort->setPortName(portName);
-    m_serialPort->setBaudRate(QSerialPort::Baud9600);
-    m_serialPort->setDataBits(QSerialPort::Data8);
-    m_serialPort->setParity(QSerialPort::NoParity);
-    m_serialPort->setStopBits(QSerialPort::OneStop);
-    m_serialPort->setFlowControl(QSerialPort::NoFlowControl);
-    
-    if (m_serialPort->open(QIODevice::ReadOnly)) {
-        m_isConnected = true;
-        m_reconnectTimer->stop();
-        emit connectionStatusChanged(true);
-        qDebug() << "Connected to Arduino on" << portName;
-        return true;
+
+    struct ifreq ifr;
+    std::memset(&ifr, 0, sizeof(ifr));
+    std::strncpy(ifr.ifr_name, "can0", IFNAMSIZ - 1);
+    if (::ioctl(m_canSocket, SIOCGIFINDEX, &ifr) < 0) {
+        qWarning() << "Failed to resolve can0 interface index";
+        closeCan();
+        return false;
     }
-    
-    qWarning() << "Failed to open" << portName << ":" << m_serialPort->errorString();
-    return false;
+
+    struct sockaddr_can addr;
+    std::memset(&addr, 0, sizeof(addr));
+    addr.can_family = AF_CAN;
+    addr.can_ifindex = ifr.ifr_ifindex;
+    if (::bind(m_canSocket, reinterpret_cast<struct sockaddr *>(&addr), sizeof(addr)) < 0) {
+        qWarning() << "Failed to bind CAN socket to can0";
+        closeCan();
+        return false;
+    }
+
+    m_canNotifier = new QSocketNotifier(m_canSocket, QSocketNotifier::Read, this);
+    connect(m_canNotifier, &QSocketNotifier::activated, this, &SerialReader::onCanReadyRead);
+
+    m_isConnected = true;
+    m_reconnectTimer->stop();
+    emit connectionStatusChanged(true);
+    qDebug() << "Connected to can0";
+    return true;
 }
 
-QString SerialReader::findArduinoPort()
+void SerialReader::closeCan()
 {
-    // List all available serial ports
-    const auto ports = QSerialPortInfo::availablePorts();
-    
-    for (const QSerialPortInfo &info : ports) {
-        // Look for Arduino-like devices
-        QString portName = info.portName();
-        
-        // Common Arduino port patterns
-        if (portName.startsWith("ttyUSB") ||
-            portName.startsWith("ttyACM") ||
-            portName.startsWith("cu.usbserial") ||
-            portName.startsWith("cu.usbmodem")) {
-            
-            qDebug() << "Found potential Arduino port:" << info.portName();
-            qDebug() << "  Description:" << info.description();
-            qDebug() << "  Manufacturer:" << info.manufacturer();
-            
-            return info.portName();
-        }
+    if (m_canNotifier) {
+        m_canNotifier->setEnabled(false);
+        m_canNotifier->deleteLater();
+        m_canNotifier = nullptr;
     }
-    
-    return QString();
+    if (m_canSocket >= 0) {
+        ::close(m_canSocket);
+        m_canSocket = -1;
+    }
+    m_isConnected = false;
 }
 
-void SerialReader::onReadyRead()
+void SerialReader::onCanReadyRead()
 {
-    // Read available data
-    QByteArray data = m_serialPort->readAll();
-    m_buffer += QString::fromUtf8(data);
-    
-    // Process complete lines
-    while (m_buffer.contains('\n')) {
-        int newlinePos = m_buffer.indexOf('\n');
-        QString line = m_buffer.left(newlinePos).trimmed();
-        m_buffer = m_buffer.mid(newlinePos + 1);
-        
-        if (!line.isEmpty()) {
-            parseData(line);
-        }
+    if (m_canSocket < 0) {
+        return;
     }
-}
 
-void SerialReader::parseData(const QString &line)
-{
-    // Expected format: "Pulses: 42 | Speed: 84.00 pulse/s | Time: 12.34 s"
-    
-    // Extract speed using regex
-    QRegularExpression re(R"(Speed:\s+([\d.]+)\s+pulse/s)");
-    QRegularExpressionMatch match = re.match(line);
-    
-    if (match.hasMatch()) {
-        float pulsePerSec = match.captured(1).toFloat();
-        emit speedDataReceived(pulsePerSec);
+    struct can_frame frame;
+    const ssize_t n = ::read(m_canSocket, &frame, sizeof(frame));
+    if (n < static_cast<ssize_t>(sizeof(struct can_frame))) {
+        return;
     }
-}
 
-void SerialReader::onErrorOccurred(QSerialPort::SerialPortError error)
-{
-    if (error == QSerialPort::ResourceError ||
-        error == QSerialPort::DeviceNotFoundError) {
-        
-        qWarning() << "Serial port error:" << m_serialPort->errorString();
-        
-        if (m_serialPort->isOpen()) {
-            m_serialPort->close();
-        }
-        
-        m_isConnected = false;
-        emit connectionStatusChanged(false);
-        
-        // Start reconnect attempts
-        if (!m_reconnectTimer->isActive()) {
-            m_reconnectTimer->start(5000);
-        }
+    const quint32 canId = static_cast<quint32>(frame.can_id & CAN_EFF_MASK);
+    if (canId != SPEED_CAN_ID || frame.can_dlc < 1) {
+        return;
     }
+
+    // candump 기준: can0 123 [8] 11 00 00 ...
+    // 첫 바이트를 km/h 속도로 사용
+    const float speedKmh = static_cast<float>(frame.data[0]);
+    emit speedDataReceived(speedKmh);
 }
 
 void SerialReader::attemptReconnect()
 {
-    qDebug() << "Attempting to reconnect to Arduino...";
-    connectToArduino();
+    qDebug() << "Attempting to reconnect to can0...";
+    if (connectToCan()) {
+        qDebug() << "Reconnected to can0";
+    }
 }

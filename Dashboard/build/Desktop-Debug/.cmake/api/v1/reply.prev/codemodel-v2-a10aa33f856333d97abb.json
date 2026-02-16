@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-a6f1cf6b6564ad925156.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "PiRacerDashboard",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "PiRacerDashboard::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PiRacerDashboard-Debug-2c9185913ab69da291f0.json",
+					"name" : "PiRacerDashboard",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "PiRacerDashboard_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PiRacerDashboard_autogen-Debug-f7b5eaad14b8810ca28b.json",
+					"name" : "PiRacerDashboard_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "PiRacerDashboard_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PiRacerDashboard_autogen_timestamp_deps-Debug-ba0f3000b60f00793e4e.json",
+					"name" : "PiRacerDashboard_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+		"source" : "/home/seame2026/piracer/Dashboard"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

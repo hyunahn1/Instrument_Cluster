@@ -57,10 +57,10 @@ void BatteryWidget::paintEvent(QPaintEvent *event)
 
 void BatteryWidget::drawBatteryIcon(QPainter *painter)
 {
-    int cx = width() / 2;
-    int cy = 40;
-    int w = 80;
-    int h = 40;
+    const int cx = width() / 2;
+    const int cy = 18;
+    const int w = 64;
+    const int h = 24;
     
     painter->save();
     
@@ -94,8 +94,8 @@ void BatteryWidget::drawBatteryIcon(QPainter *painter)
 
 void BatteryWidget::drawPercentage(QPainter *painter)
 {
-    int cx = width() / 2;
-    int cy = 100;
+    const int cx = width() / 2;
+    const int cy = 48;
     
     painter->save();
     
@@ -108,12 +108,12 @@ void BatteryWidget::drawPercentage(QPainter *painter)
     }
     
     // Draw percentage
-    QFont font("Roboto", 32, QFont::Bold);
+    QFont font("Roboto", 18, QFont::Bold);
     painter->setFont(font);
     painter->setPen(color);
     
-    QString percentText = QString::number(static_cast<int>(m_percent)) + "%";
-    QRect rect(cx - 75, cy - 25, 150, 50);
+    QString percentText = QString::number(m_percent, 'f', 1) + "%";
+    QRect rect(cx - 80, cy - 14, 160, 28);
     painter->drawText(rect, Qt::AlignCenter, percentText);
     
     painter->restore();
@@ -121,18 +121,18 @@ void BatteryWidget::drawPercentage(QPainter *painter)
 
 void BatteryWidget::drawVoltage(QPainter *painter)
 {
-    int cx = width() / 2;
-    int cy = 145;
+    const int cx = width() / 2;
+    const int cy = 72;
     
     painter->save();
     
     // Draw voltage
-    QFont font("Roboto", 20);
+    QFont font("Roboto", 11);
     painter->setFont(font);
     painter->setPen(QColor("#7A8A9E"));
     
     QString voltageText = QString::number(m_voltage, 'f', 1) + "V";
-    QRect rect(cx - 60, cy - 15, 120, 30);
+    QRect rect(cx - 60, cy - 10, 120, 20);
     painter->drawText(rect, Qt::AlignCenter, voltageText);
     
     painter->restore();

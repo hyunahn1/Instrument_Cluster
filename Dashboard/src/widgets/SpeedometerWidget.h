@@ -42,6 +42,7 @@ private:
     void drawGauge(QPainter *painter);
     void drawTicks(QPainter *painter);
     void drawNeedle(QPainter *painter);
+    void drawShiftLights(QPainter *painter);
     void drawDigitalSpeed(QPainter *painter);
     
     float m_speed;

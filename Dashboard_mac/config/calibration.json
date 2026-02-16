@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "speed": {
+    "pulses_per_second_to_kmh": 0.72,
+    "comment": "Needs actual measurement. This is an example value."
+  },
+  "rpm": {
+    "pulses_per_revolution": 20,
+    "comment": "Pulses per 1 wheel rotation. Measure by rotating wheel manually."
+  },
+  "wheel": {
+    "diameter_mm": 65,
+    "circumference_mm": 204.2,
+    "comment": "PiRacer wheel specifications"
+  },
+  "battery": {
+    "v_min": 6.4,
+    "v_max": 8.4,
+    "cells": 2,
+    "type": "LiPo 2S"
+  }
+}

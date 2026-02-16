@@ -56,6 +56,7 @@ void SpeedometerWidget::paintEvent(QPaintEvent *event)
     // Draw components
     drawGauge(&painter);
     drawTicks(&painter);
+    drawShiftLights(&painter);
     drawNeedle(&painter);
     drawDigitalSpeed(&painter);
 }
@@ -68,28 +69,43 @@ void SpeedometerWidget::drawGauge(QPainter *painter)
     
     painter->save();
     painter->translate(cx, cy);
+
+    // Inner dial fill with radial depth (AMG-inspired dark metallic feel)
+    QRadialGradient dialGrad(QPointF(0, -radius * 0.15f), radius * 1.1f);
+    dialGrad.setColorAt(0.0, QColor("#273247"));
+    dialGrad.setColorAt(0.45, QColor("#141D2D"));
+    dialGrad.setColorAt(1.0, QColor("#070C16"));
+    painter->setPen(Qt::NoPen);
+    painter->setBrush(dialGrad);
+    painter->drawEllipse(QPointF(0, 0), radius - 12, radius - 12);
     
-    // Draw outer circle (silver)
-    QPen pen(QColor("#C0C8D0"), 3);
+    // Draw outer ring (brushed-metal look)
+    QPen pen(QColor("#A7B3C2"), 2);
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);
     painter->drawEllipse(QPointF(0, 0), radius, radius);
+
+    // Inner ring for depth
+    pen.setColor(QColor(52, 67, 87, 180));
+    pen.setWidth(2);
+    painter->setPen(pen);
+    painter->drawEllipse(QPointF(0, 0), radius - 10, radius - 10);
     
     // Draw arc background
     painter->setPen(Qt::NoPen);
-    painter->setBrush(QColor("#1A1E2A"));
+    painter->setBrush(QColor("#111725"));
     
     QPainterPath arcPath;
     arcPath.arcMoveTo(-radius, -radius, radius * 2, radius * 2, GAUGE_START_ANGLE);
     arcPath.arcTo(-radius, -radius, radius * 2, radius * 2, GAUGE_START_ANGLE, GAUGE_SPAN_ANGLE);
     painter->drawPath(arcPath);
     
-    // Draw red zone arc
+    // Draw red zone arc (AMG-style aggressive accent)
     float redZoneStartAngle = GAUGE_START_ANGLE + (RED_ZONE_START / MAX_SPEED) * GAUGE_SPAN_ANGLE;
     float redZoneSpan = ((MAX_SPEED - RED_ZONE_START) / MAX_SPEED) * GAUGE_SPAN_ANGLE;
     
-    pen.setColor(QColor("#FF3B3B"));
-    pen.setWidth(8);
+    pen.setColor(QColor("#FF2D3E"));
+    pen.setWidth(9);
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);
     
@@ -97,6 +113,43 @@ void SpeedometerWidget::drawGauge(QPainter *painter)
                     static_cast<int>(redZoneStartAngle * 16),
                     static_cast<int>(redZoneSpan * 16));
     
+    painter->restore();
+}
+
+void SpeedometerWidget::drawShiftLights(QPainter *painter)
+{
+    const int cx = width() / 2;
+    const int cy = height() / 2;
+    const int radius = qMin(width(), height()) / 2 - 20;
+    constexpr int lightCount = 11;
+    constexpr float startDeg = 200.0f;
+    constexpr float endDeg = 340.0f;
+
+    painter->save();
+    painter->translate(cx, cy);
+
+    const float normalized = qBound(0.0f, m_speed / MAX_SPEED, 1.0f);
+    const int activeLights = static_cast<int>(normalized * lightCount + 0.5f);
+
+    for (int i = 0; i < lightCount; ++i) {
+        const float t = (lightCount == 1) ? 0.0f : static_cast<float>(i) / (lightCount - 1);
+        const float angleDeg = startDeg + (endDeg - startDeg) * t;
+        const float a = qDegreesToRadians(angleDeg);
+        const float r = radius - 18.0f;
+        const QPointF p(qCos(a) * r, qSin(a) * r);
+
+        QColor color = QColor("#33445B");
+        if (i < activeLights) {
+            if (t < 0.55f) color = QColor("#B6F7FF");
+            else if (t < 0.8f) color = QColor("#FFD65E");
+            else color = QColor("#FF3848");
+        }
+
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(color);
+        painter->drawRoundedRect(QRectF(p.x() - 7.0, p.y() - 1.9, 14.0, 3.8), 1.8, 1.8);
+    }
+
     painter->restore();
 }
 
@@ -117,7 +170,7 @@ void SpeedometerWidget::drawTicks(QPainter *painter)
         painter->rotate(angle);
         
         // Major tick
-        QPen pen(QColor("#E8F0FF"), 2);
+        QPen pen(QColor("#EAF2FF"), 2);
         painter->setPen(pen);
         painter->drawLine(0, -radius + 15, 0, -radius + 35);
         
@@ -127,9 +180,9 @@ void SpeedometerWidget::drawTicks(QPainter *painter)
         int textX = static_cast<int>((radius - 55) * qCos(textAngle));
         int textY = static_cast<int>((radius - 55) * qSin(textAngle));
         
-        QFont font("Roboto", 12);
+        QFont font("Roboto", 11, QFont::Medium);
         painter->setFont(font);
-        painter->setPen(QColor("#E8F0FF"));
+        painter->setPen(QColor("#C9D8EA"));
         
         QString label = QString::number(speed);
         QRect textRect(textX - 20, textY - 10, 40, 20);
@@ -147,7 +200,7 @@ void SpeedometerWidget::drawTicks(QPainter *painter)
         float angle = GAUGE_START_ANGLE + (speed / MAX_SPEED) * GAUGE_SPAN_ANGLE;
         painter->rotate(angle);
         
-        QPen pen(QColor("#7A8A9E"), 1);
+        QPen pen(QColor("#5E7088"), 1);
         painter->setPen(pen);
         painter->drawLine(0, -radius + 20, 0, -radius + 30);
         
@@ -166,7 +219,8 @@ void SpeedometerWidget::drawNeedle(QPainter *painter)
     painter->save();
     painter->translate(cx, cy);
     
-    float needleAngle = GAUGE_START_ANGLE + m_needleAngle;
+    // Align needle with gauge tick angle space (Qt rotation starts from upward vector).
+    float needleAngle = GAUGE_START_ANGLE + m_needleAngle + 90.0f;
     painter->rotate(needleAngle);
     
     // Needle color (red if in red zone)
@@ -193,27 +247,30 @@ void SpeedometerWidget::drawNeedle(QPainter *painter)
 
 void SpeedometerWidget::drawDigitalSpeed(QPainter *painter)
 {
-    int cx = width() / 2;
-    int cy = height() / 2 + 80;
+    const int cx = width() / 2;
+    const int cy = height() / 2 + 82;
     
     painter->save();
-    
-    // Draw speed number
-    QFont font("Roboto", 72, QFont::Bold);
-    painter->setFont(font);
-    painter->setPen(QColor("#E8F0FF"));
-    
-    QString speedText = QString::number(static_cast<int>(m_speed));
-    QRect speedRect(cx - 150, cy - 50, 300, 80);
+
+    // Unit label (clean and minimal)
+    QFont unitFont("Roboto", 13, QFont::Medium);
+    painter->setFont(unitFont);
+    painter->setPen(QColor("#89A3C1"));
+    QRect unitRect(cx - 90, cy - 20, 180, 20);
+    painter->drawText(unitRect, Qt::AlignHCenter | Qt::AlignVCenter, "km/h");
+
+    // Main speed number (big, premium, no box)
+    const QString speedText = QString::number(static_cast<int>(m_speed));
+    QFont speedFont("Roboto Mono", 74, QFont::Black);
+    speedFont.setLetterSpacing(QFont::AbsoluteSpacing, 1.0);
+    painter->setFont(speedFont);
+
+    QRect speedRect(cx - 150, cy - 2, 300, 98);
+    painter->setPen(QColor(0, 0, 0, 135));
+    painter->drawText(speedRect.adjusted(0, 3, 0, 3), Qt::AlignCenter, speedText);
+
+    painter->setPen(QColor("#F4FAFF"));
     painter->drawText(speedRect, Qt::AlignCenter, speedText);
-    
-    // Draw unit
-    font.setPointSize(24);
-    font.setWeight(QFont::Normal);
-    painter->setFont(font);
-    
-    QRect unitRect(cx - 100, cy + 30, 200, 40);
-    painter->drawText(unitRect, Qt::AlignCenter, "km/h");
     
     painter->restore();
 }

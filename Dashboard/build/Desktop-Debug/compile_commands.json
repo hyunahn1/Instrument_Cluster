@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/mocs_compilation.cpp.o -c /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/mocs_compilation.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/main.cpp.o -c /home/seame2026/piracer/Dashboard/src/main.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/main.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/MainWindow.cpp.o -c /home/seame2026/piracer/Dashboard/src/MainWindow.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/MainWindow.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/MainWindow.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/widgets/SpeedometerWidget.cpp.o -c /home/seame2026/piracer/Dashboard/src/widgets/SpeedometerWidget.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/widgets/SpeedometerWidget.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/widgets/SpeedometerWidget.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/widgets/RpmGauge.cpp.o -c /home/seame2026/piracer/Dashboard/src/widgets/RpmGauge.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/widgets/RpmGauge.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/widgets/RpmGauge.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/widgets/BatteryWidget.cpp.o -c /home/seame2026/piracer/Dashboard/src/widgets/BatteryWidget.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/widgets/BatteryWidget.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/widgets/BatteryWidget.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/serial/SerialReader.cpp.o -c /home/seame2026/piracer/Dashboard/src/serial/SerialReader.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/serial/SerialReader.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/serial/SerialReader.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/utils/DataProcessor.cpp.o -c /home/seame2026/piracer/Dashboard/src/utils/DataProcessor.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/utils/DataProcessor.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/utils/DataProcessor.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/src/utils/CalibrationManager.cpp.o -c /home/seame2026/piracer/Dashboard/src/utils/CalibrationManager.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/src/utils/CalibrationManager.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/src/utils/CalibrationManager.cpp.o"
+},
+{
+  "directory": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -I/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/include -I/home/seame2026/piracer/Dashboard/src -I/home/seame2026/piracer/Dashboard/src/widgets -I/home/seame2026/piracer/Dashboard/src/serial -I/home/seame2026/piracer/Dashboard/src/utils -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtSerialPort -g -std=gnu++17 -fPIC -o CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboard.cpp.o -c /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboard.cpp",
+  "file": "/home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboard.cpp",
+  "output": "CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboard.cpp.o"
+}
+]
