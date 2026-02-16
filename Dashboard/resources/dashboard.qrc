@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Font resources can be added here when bundled -->
+    </qresource>
+</RCC>

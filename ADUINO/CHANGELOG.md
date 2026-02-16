@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2026-02-16
+
+### Fixed
+- Serial communication issue with Raspberry Pi 4
+  - Changed CPU frequency from 16MHz to 8MHz in platformio.ini
+  - Added `board_build.f_cpu = 8000000L` configuration
+  - Resolved serial data transmission compatibility issue
+
+---
+
 ## [1.0.0] - 2026-02-12
 
 ### Added

@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_PiRacerDashboard_FILE /Users/ahnhyunjun/Documents/PlatformIO/Projects/ADUINO/Dashboard/build/Qt_6_8_3_for_macOS-Debug/PiRacerDashboard.app/Contents/MacOS/PiRacerDashboard)
+set(__QT_DEPLOY_TARGET_PiRacerDashboard_TYPE EXECUTABLE)
