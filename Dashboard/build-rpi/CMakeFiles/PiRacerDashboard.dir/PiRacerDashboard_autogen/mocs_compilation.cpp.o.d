@@ -319,9 +319,8 @@ CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/mocs_compilation.cpp.o:
  /home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen/UNQDMUN5UU/../../../src/serial/SerialReader.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QObject \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/QSerialPort \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialport.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialportglobal.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QSocketNotifier \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qsocketnotifier.h \
  /home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen/VSCBVMNR7M/moc_DataProcessor.cpp \
  /home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen/VSCBVMNR7M/../../../src/utils/DataProcessor.h \
  /home/seame2026/piracer/Dashboard/build-rpi/PiRacerDashboard_autogen/RZ4CM6YYJ6/moc_BatteryWidget.cpp \

@@ -329,8 +329,6 @@ CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/mocs_compilation.cpp.o:
  /usr/include/aarch64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/moc_RpmGauge.cpp \
  /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/../../../../src/widgets/RpmGauge.h \
- /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/moc_SpeedometerWidget.cpp \
- /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/../../../../src/widgets/SpeedometerWidget.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QPropertyAnimation \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qpropertyanimation.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariantanimation.h \
@@ -338,4 +336,6 @@ CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/mocs_compilation.cpp.o:
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qabstractanimation.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariant.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qmap.h \
- /usr/include/c++/14/variant
+ /usr/include/c++/14/variant \
+ /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/moc_SpeedometerWidget.cpp \
+ /home/seame2026/piracer/Dashboard/build/Desktop-Debug/PiRacerDashboard_autogen/RZ4CM6YYJ6/../../../../src/widgets/SpeedometerWidget.h

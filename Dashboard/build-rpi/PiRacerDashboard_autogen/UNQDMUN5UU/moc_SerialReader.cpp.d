@@ -67,6 +67,7 @@
   /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
   /usr/include/aarch64-linux-gnu/gnu/stubs.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/QObject \
+  /usr/include/aarch64-linux-gnu/qt5/QtCore/QSocketNotifier \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/QTimer \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qalgorithms.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qarraydata.h \
@@ -86,7 +87,6 @@
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qglobal.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qglobalstatic.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qhashfunctions.h \
-  /usr/include/aarch64-linux-gnu/qt5/QtCore/qiodevice.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qiterator.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qlist.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qlogging.h \
@@ -102,6 +102,7 @@
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qrefcount.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qregexp.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qscopedpointer.h \
+  /usr/include/aarch64-linux-gnu/qt5/QtCore/qsocketnotifier.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qstring.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringalgorithms.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qstringlist.h \
@@ -116,9 +117,6 @@
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qvarlengtharray.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qvector.h \
   /usr/include/aarch64-linux-gnu/qt5/QtCore/qversiontagging.h \
-  /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/QSerialPort \
-  /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialport.h \
-  /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialportglobal.h \
   /usr/include/aarch64-linux-gnu/sys/cdefs.h \
   /usr/include/aarch64-linux-gnu/sys/syscall.h \
   /usr/include/asm-generic/bitsperlong.h \

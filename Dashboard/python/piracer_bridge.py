@@ -12,12 +12,20 @@ Version: 1.0.0
 """
 
 import json
+import os
 import sys
 import time
 import struct
+import fcntl
+from enum import Enum
 from collections import deque
 from statistics import median
 from typing import Dict, Optional
+
+# Ensure project root is importable regardless of current working directory.
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 try:
     from piracer.vehicles import PiRacerStandard, PiRacerPro
@@ -25,6 +33,13 @@ try:
 except ImportError:
     PIRACER_AVAILABLE = False
     print("Warning: piracer-py not installed. Running in simulation mode.", file=sys.stderr)
+
+try:
+    from piracer.gamepads import ShanWanGamepad
+    GAMEPAD_AVAILABLE = True
+except ImportError:
+    GAMEPAD_AVAILABLE = False
+    print("Warning: ShanWanGamepad not available. Direction fallback enabled.", file=sys.stderr)
 
 try:
     import can
@@ -122,6 +137,13 @@ class BatteryMonitor:
         return self.soc_percent
 
 
+class DriveMode(Enum):
+    NEUTRAL = "N"
+    DRIVE = "F"
+    REVERSE = "R"
+    BRAKE = "N"
+
+
 class PiRacerBridge:
     """
     PiRacer 데이터를 읽어서 JSON으로 출력하는 브릿지 클래스
@@ -135,6 +157,7 @@ class PiRacerBridge:
     UPDATE_INTERVAL = 0.5
     # 현재 현장 로그 기준 속도 CAN ID (candump: "can0 123 [8] ..")
     SPEED_CAN_ID = 0x123
+    DRIVE_MODE_SNAPSHOT_PATH = "/tmp/piracer_drive_mode.json"
     
     def __init__(self, vehicle_type: str = "standard"):
         """
@@ -145,11 +168,14 @@ class PiRacerBridge:
         """
         self.vehicle_type = vehicle_type
         self.piracer: Optional[PiRacerStandard] = None
-        self.last_throttle = 0.0  # 마지막 스로틀 값 추적 (방향 감지용)
+        self.last_throttle = 0.0
         self.can_bus = None
         self.last_can_speed_kmh = 0.0
         self.last_can_rpm = 0.0
         self.battery_monitor = BatteryMonitor(capacity_mah=2500.0, alpha=0.12)
+        self.gamepad = None
+        self.drive_mode = DriveMode.NEUTRAL
+        self.prev_buttons = {"x": False, "a": False, "b": False, "y": False}
         
         if PIRACER_AVAILABLE:
             try:
@@ -171,6 +197,19 @@ class PiRacerBridge:
             except Exception as e:
                 print(f"Warning: failed to open can0: {e}", file=sys.stderr)
                 self.can_bus = None
+
+        if GAMEPAD_AVAILABLE:
+            try:
+                self.gamepad = ShanWanGamepad()
+                jsdev = getattr(self.gamepad, "jsdev", None)
+                if jsdev is not None:
+                    fd = jsdev.fileno()
+                    flags = fcntl.fcntl(fd, fcntl.F_GETFL)
+                    fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+                print("Gamepad initialized for drive direction", file=sys.stderr)
+            except Exception as e:
+                print(f"Warning: failed to initialize gamepad: {e}", file=sys.stderr)
+                self.gamepad = None
     
     def calculate_battery_percent(self, voltage: float) -> float:
         """
@@ -241,6 +280,78 @@ class PiRacerBridge:
             return "R"
         else:
             return "N"
+
+    def update_drive_mode_from_gamepad(self) -> None:
+        """
+        Update drive mode using explicit gamepad button mapping:
+        X -> DRIVE(F), B -> REVERSE(R), Y -> NEUTRAL(N), A -> BRAKE(N)
+        """
+        if self.gamepad is None:
+            return
+
+        try:
+            gamepad_input = self.gamepad.read_data()
+        except BlockingIOError:
+            return
+        except OSError as e:
+            if e.errno in (11, 35):
+                return
+            print(f"Warning: gamepad read failed: {e}", file=sys.stderr)
+            return
+        except Exception as e:
+            print(f"Warning: gamepad read failed: {e}", file=sys.stderr)
+            return
+
+        x_pressed = bool(getattr(gamepad_input, "button_x", False))
+        a_pressed = bool(getattr(gamepad_input, "button_a", False))
+        b_pressed = bool(getattr(gamepad_input, "button_b", False))
+        y_pressed = bool(getattr(gamepad_input, "button_y", False))
+
+        if x_pressed and not self.prev_buttons["x"]:
+            self.drive_mode = DriveMode.DRIVE
+        if b_pressed and not self.prev_buttons["b"]:
+            self.drive_mode = DriveMode.REVERSE
+        if y_pressed and not self.prev_buttons["y"]:
+            self.drive_mode = DriveMode.NEUTRAL
+        if a_pressed and not self.prev_buttons["a"]:
+            self.drive_mode = DriveMode.BRAKE
+
+        self.prev_buttons["x"] = x_pressed
+        self.prev_buttons["a"] = a_pressed
+        self.prev_buttons["b"] = b_pressed
+        self.prev_buttons["y"] = y_pressed
+
+    def update_drive_mode_from_snapshot(self) -> bool:
+        """
+        Read drive mode from external control script snapshot.
+        Returns True when direction was updated from snapshot.
+        """
+        try:
+            stat = os.stat(self.DRIVE_MODE_SNAPSHOT_PATH)
+        except OSError:
+            return False
+
+        # Ignore stale snapshot.
+        if (time.time() - stat.st_mtime) > 2.0:
+            return False
+
+        try:
+            with open(self.DRIVE_MODE_SNAPSHOT_PATH, "r", encoding="utf-8") as fp:
+                data = json.load(fp)
+        except (OSError, ValueError, json.JSONDecodeError):
+            return False
+
+        direction = str(data.get("direction", "")).strip().upper()
+        if direction == "F":
+            self.drive_mode = DriveMode.DRIVE
+            return True
+        if direction == "R":
+            self.drive_mode = DriveMode.REVERSE
+            return True
+        if direction == "N":
+            self.drive_mode = DriveMode.NEUTRAL
+            return True
+        return False
     
     def read_piracer_data(self) -> Dict:
         """
@@ -250,6 +361,8 @@ class PiRacerBridge:
             데이터 딕셔너리
         """
         can_data = self.read_can_data()
+        if not self.update_drive_mode_from_snapshot():
+            self.update_drive_mode_from_gamepad()
         
         try:
             if self.piracer is not None:
@@ -261,9 +374,12 @@ class PiRacerBridge:
                 return sim
 
             percent = self.battery_monitor.update(voltage, current)
-            direction = self.get_direction_from_throttle(self.last_throttle)
-            if "speed_kmh" in can_data and abs(float(can_data["speed_kmh"])) > 0.1 and direction == "N":
-                direction = "F"
+            direction = self.drive_mode.value
+            if self.gamepad is None:
+                # Fallback when gamepad is not connected.
+                direction = self.get_direction_from_throttle(self.last_throttle)
+                if "speed_kmh" in can_data and abs(float(can_data["speed_kmh"])) > 0.1 and direction == "N":
+                    direction = "F"
 
             output = {
                 "battery": {
@@ -303,7 +419,7 @@ class PiRacerBridge:
                 "current": round(150.0 + 50.0 * (t % 5) / 5, 1),  # 150~200 mA
                 "power": round(voltage * 0.15, 2)  # W
             },
-            "direction": "F",  # 항상 전진
+            "direction": "N",
             "timestamp": t
         }
     

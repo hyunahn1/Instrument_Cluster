@@ -9,18 +9,20 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QFont>
-#include <QFontDatabase>
 #include <QtMath>
 
 SpeedometerWidget::SpeedometerWidget(QWidget *parent)
     : QWidget(parent)
     , m_speed(0.0f)
-    , m_needleAngle(0.0f)
+    // Start from 6 o'clock-like position and animate to zero speed on first update.
+    , m_needleAngle(-45.0f)
+    , m_lastTargetAngle(-9999.0f)
+    , m_startupAnimationDone(false)
     , m_needleAnimation(nullptr)
 {
     // Setup needle animation
     m_needleAnimation = new QPropertyAnimation(this, "needleAngle");
-    m_needleAnimation->setDuration(200);
+    m_needleAnimation->setDuration(220);
     m_needleAnimation->setEasingCurve(QEasingCurve::OutCubic);
 }
 
@@ -32,11 +34,26 @@ void SpeedometerWidget::setSpeed(float speedKmh)
     
     // Calculate target needle angle (0-270°)
     float targetAngle = (speedKmh / MAX_SPEED) * GAUGE_SPAN_ANGLE;
+
+    // Avoid restarting the same animation target every frame.
+    if (qAbs(targetAngle - m_lastTargetAngle) < 0.05f) {
+        return;
+    }
+    m_lastTargetAngle = targetAngle;
     
     // Animate needle
     m_needleAnimation->stop();
     m_needleAnimation->setStartValue(m_needleAngle);
     m_needleAnimation->setEndValue(targetAngle);
+    if (!m_startupAnimationDone) {
+        // Startup sweep: slower, ignition-like movement.
+        m_needleAnimation->setDuration(1150);
+        m_needleAnimation->setEasingCurve(QEasingCurve::InOutCubic);
+        m_startupAnimationDone = true;
+    } else {
+        m_needleAnimation->setDuration(220);
+        m_needleAnimation->setEasingCurve(QEasingCurve::OutCubic);
+    }
     m_needleAnimation->start();
 }
 
@@ -91,14 +108,14 @@ void SpeedometerWidget::drawGauge(QPainter *painter)
     painter->setPen(pen);
     painter->drawEllipse(QPointF(0, 0), radius - 10, radius - 10);
     
-    // Draw arc background
-    painter->setPen(Qt::NoPen);
-    painter->setBrush(QColor("#111725"));
-    
-    QPainterPath arcPath;
-    arcPath.arcMoveTo(-radius, -radius, radius * 2, radius * 2, GAUGE_START_ANGLE);
-    arcPath.arcTo(-radius, -radius, radius * 2, radius * 2, GAUGE_START_ANGLE, GAUGE_SPAN_ANGLE);
-    painter->drawPath(arcPath);
+    // Subtle cyan outer accent arc for motorsport feel.
+    QPen arcPen(QColor(0, 212, 255, 90), 4);
+    painter->setPen(arcPen);
+    painter->setBrush(Qt::NoBrush);
+    painter->drawArc(-radius + 2, -radius + 2, (radius - 2) * 2, (radius - 2) * 2,
+                     static_cast<int>(GAUGE_START_ANGLE * 16),
+                     static_cast<int>(GAUGE_SPAN_ANGLE * 16));
+
     
     // Draw red zone arc (AMG-style aggressive accent)
     float redZoneStartAngle = GAUGE_START_ANGLE + (RED_ZONE_START / MAX_SPEED) * GAUGE_SPAN_ANGLE;
@@ -129,7 +146,11 @@ void SpeedometerWidget::drawShiftLights(QPainter *painter)
     painter->translate(cx, cy);
 
     const float normalized = qBound(0.0f, m_speed / MAX_SPEED, 1.0f);
-    const int activeLights = static_cast<int>(normalized * lightCount + 0.5f);
+    int activeLights = qBound(0, static_cast<int>(qCeil(normalized * lightCount)), lightCount);
+    // Ensure red-zone entry clearly lights up the top-end bars.
+    if (m_speed >= RED_ZONE_START) {
+        activeLights = qMax(activeLights, lightCount - 2);
+    }
 
     for (int i = 0; i < lightCount; ++i) {
         const float t = (lightCount == 1) ? 0.0f : static_cast<float>(i) / (lightCount - 1);
@@ -226,21 +247,11 @@ void SpeedometerWidget::drawNeedle(QPainter *painter)
     // Needle color (red if in red zone)
     QColor needleColor = (m_speed >= RED_ZONE_START) ? QColor("#FF3B3B") : QColor("#FFFFFF");
     
-    // Draw needle
-    QPainterPath needlePath;
-    needlePath.moveTo(0, 0);
-    needlePath.lineTo(-3, -10);
-    needlePath.lineTo(0, -radius + 40);
-    needlePath.lineTo(3, -10);
-    needlePath.closeSubpath();
-    
-    painter->setPen(Qt::NoPen);
-    painter->setBrush(needleColor);
-    painter->drawPath(needlePath);
-    
-    // Center circle
-    painter->setBrush(QColor("#C0C8D0"));
-    painter->drawEllipse(QPointF(0, 0), 8, 8);
+    // Porsche-like needle tip only: show only the outer segment.
+    painter->setPen(QPen(needleColor, 4, Qt::SolidLine, Qt::RoundCap));
+    const int innerTip = radius - 54;
+    const int outerTip = radius - 24;
+    painter->drawLine(QPointF(0, -innerTip), QPointF(0, -outerTip));
     
     painter->restore();
 }
@@ -248,28 +259,28 @@ void SpeedometerWidget::drawNeedle(QPainter *painter)
 void SpeedometerWidget::drawDigitalSpeed(QPainter *painter)
 {
     const int cx = width() / 2;
-    const int cy = height() / 2 + 82;
+    const int cy = height() / 2 + 4;
     
     painter->save();
-
-    // Unit label (clean and minimal)
-    QFont unitFont("Roboto", 13, QFont::Medium);
+    
+    // Compact center readout (minimal, no chunky rectangle).
+    QFont unitFont("Roboto", 10, QFont::Medium);
     painter->setFont(unitFont);
-    painter->setPen(QColor("#89A3C1"));
-    QRect unitRect(cx - 90, cy - 20, 180, 20);
+    painter->setPen(QColor("#88A8C6"));
+    QRect unitRect(cx - 74, cy + 24, 148, 14);
     painter->drawText(unitRect, Qt::AlignHCenter | Qt::AlignVCenter, "km/h");
 
-    // Main speed number (big, premium, no box)
+    // Main speed number
     const QString speedText = QString::number(static_cast<int>(m_speed));
-    QFont speedFont("Roboto Mono", 74, QFont::Black);
-    speedFont.setLetterSpacing(QFont::AbsoluteSpacing, 1.0);
+    QFont speedFont("Roboto Mono", 46, QFont::Bold);
+    speedFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.8);
     painter->setFont(speedFont);
 
-    QRect speedRect(cx - 150, cy - 2, 300, 98);
-    painter->setPen(QColor(0, 0, 0, 135));
-    painter->drawText(speedRect.adjusted(0, 3, 0, 3), Qt::AlignCenter, speedText);
+    QRect speedRect(cx - 96, cy - 30, 192, 60);
+    painter->setPen(QColor(0, 0, 0, 105));
+    painter->drawText(speedRect.adjusted(0, 2, 0, 2), Qt::AlignCenter, speedText);
 
-    painter->setPen(QColor("#F4FAFF"));
+    painter->setPen(QColor("#F3FBFF"));
     painter->drawText(speedRect, Qt::AlignCenter, speedText);
     
     painter->restore();

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SerialReader_t {
-    QByteArrayData data[11];
-    char stringdata0[158];
+    QByteArrayData data[8];
+    char stringdata0[110];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,18 +38,13 @@ QT_MOC_LITERAL(2, 31, 0), // ""
 QT_MOC_LITERAL(3, 32, 11), // "pulsePerSec"
 QT_MOC_LITERAL(4, 44, 23), // "connectionStatusChanged"
 QT_MOC_LITERAL(5, 68, 9), // "connected"
-QT_MOC_LITERAL(6, 78, 11), // "onReadyRead"
-QT_MOC_LITERAL(7, 90, 15), // "onErrorOccurred"
-QT_MOC_LITERAL(8, 106, 28), // "QSerialPort::SerialPortError"
-QT_MOC_LITERAL(9, 135, 5), // "error"
-QT_MOC_LITERAL(10, 141, 16) // "attemptReconnect"
+QT_MOC_LITERAL(6, 78, 14), // "onCanReadyRead"
+QT_MOC_LITERAL(7, 93, 16) // "attemptReconnect"
 
     },
     "SerialReader\0speedDataReceived\0\0"
     "pulsePerSec\0connectionStatusChanged\0"
-    "connected\0onReadyRead\0onErrorOccurred\0"
-    "QSerialPort::SerialPortError\0error\0"
-    "attemptReconnect"
+    "connected\0onCanReadyRead\0attemptReconnect"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +54,7 @@ static const uint qt_meta_data_SerialReader[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,13 +62,12 @@ static const uint qt_meta_data_SerialReader[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
-       4,    1,   42,    2, 0x06 /* Public */,
+       1,    1,   34,    2, 0x06 /* Public */,
+       4,    1,   37,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   45,    2, 0x08 /* Private */,
-       7,    1,   46,    2, 0x08 /* Private */,
-      10,    0,   49,    2, 0x08 /* Private */,
+       6,    0,   40,    2, 0x08 /* Private */,
+       7,    0,   41,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Float,    3,
@@ -81,7 +75,6 @@ static const uint qt_meta_data_SerialReader[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void,
 
        0        // eod
@@ -95,9 +88,8 @@ void SerialReader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         switch (_id) {
         case 0: _t->speedDataReceived((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 1: _t->connectionStatusChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 2: _t->onReadyRead(); break;
-        case 3: _t->onErrorOccurred((*reinterpret_cast< QSerialPort::SerialPortError(*)>(_a[1]))); break;
-        case 4: _t->attemptReconnect(); break;
+        case 2: _t->onCanReadyRead(); break;
+        case 3: _t->attemptReconnect(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -148,13 +140,13 @@ int SerialReader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

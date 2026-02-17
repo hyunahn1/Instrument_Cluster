@@ -345,6 +345,8 @@ CMakeFiles/PiRacerDashboard.dir/src/MainWindow.cpp.o: \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qfileinfo.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qfile.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qfiledevice.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QFile \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qfile.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QFileInfo \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qfileinfo.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QJsonDocument \
@@ -363,5 +365,12 @@ CMakeFiles/PiRacerDashboard.dir/src/MainWindow.cpp.o: \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/quuid.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QJsonObject \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qjsonobject.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtWidgets/QGraphicsOpacityEffect \
+ /usr/include/aarch64-linux-gnu/qt5/QtWidgets/qgraphicseffect.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QParallelAnimationGroup \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qparallelanimationgroup.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qanimationgroup.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QEasingCurve \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qeasingcurve.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QDebug \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qdebug.h

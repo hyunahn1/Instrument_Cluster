@@ -292,6 +292,14 @@ CMakeFiles/PiRacerDashboard.dir/src/widgets/RpmGauge.cpp.o: \
  /usr/include/aarch64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qcursor.h \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qkeysequence.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QPropertyAnimation \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qpropertyanimation.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariantanimation.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qeasingcurve.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qabstractanimation.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariant.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qmap.h \
+ /usr/include/c++/14/variant \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/QPainter \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qpainter.h \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qtextoption.h \
@@ -322,4 +330,6 @@ CMakeFiles/PiRacerDashboard.dir/src/widgets/RpmGauge.cpp.o: \
  /usr/include/c++/14/tr1/modified_bessel_func.tcc \
  /usr/include/c++/14/tr1/poly_hermite.tcc \
  /usr/include/c++/14/tr1/poly_laguerre.tcc \
- /usr/include/c++/14/tr1/riemann_zeta.tcc
+ /usr/include/c++/14/tr1/riemann_zeta.tcc \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QEasingCurve \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qeasingcurve.h

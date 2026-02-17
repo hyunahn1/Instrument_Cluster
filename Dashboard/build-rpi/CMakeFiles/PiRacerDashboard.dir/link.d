@@ -43,7 +43,6 @@ PiRacerDashboard: \
   /usr/lib/gcc/aarch64-linux-gnu/14/crtendS.o \
   /usr/lib/gcc/aarch64-linux-gnu/14/../../../aarch64-linux-gnu/crtn.o \
   /lib/ld-linux-aarch64.so.1 \
-  /lib/aarch64-linux-gnu/libudev.so.1 \
   /lib/aarch64-linux-gnu/libGL.so.1 \
   /lib/aarch64-linux-gnu/libpng16.so.16 \
   /lib/aarch64-linux-gnu/libz.so.1 \
@@ -55,7 +54,6 @@ PiRacerDashboard: \
   /lib/aarch64-linux-gnu/libpcre2-16.so.0 \
   /lib/aarch64-linux-gnu/libzstd.so.1 \
   /lib/aarch64-linux-gnu/libglib-2.0.so.0 \
-  /lib/aarch64-linux-gnu/libcap.so.2 \
   /lib/aarch64-linux-gnu/libGLdispatch.so.0 \
   /lib/aarch64-linux-gnu/libGLX.so.0 \
   /lib/aarch64-linux-gnu/libfreetype.so.6 \
@@ -159,8 +157,6 @@ CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboar
 
 /lib/ld-linux-aarch64.so.1:
 
-/lib/aarch64-linux-gnu/libudev.so.1:
-
 /lib/aarch64-linux-gnu/libGL.so.1:
 
 /lib/aarch64-linux-gnu/libpng16.so.16:
@@ -182,8 +178,6 @@ CMakeFiles/PiRacerDashboard.dir/PiRacerDashboard_autogen/3YJK5W5UP7/qrc_dashboar
 /lib/aarch64-linux-gnu/libzstd.so.1:
 
 /lib/aarch64-linux-gnu/libglib-2.0.so.0:
-
-/lib/aarch64-linux-gnu/libcap.so.2:
 
 /lib/aarch64-linux-gnu/libGLdispatch.so.0:
 

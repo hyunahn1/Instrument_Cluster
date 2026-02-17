@@ -331,9 +331,8 @@ CMakeFiles/PiRacerDashboard.dir/src/MainWindow.cpp.o: \
  /home/seame2026/piracer/Dashboard/src/serial/SerialReader.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QObject \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/QSerialPort \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialport.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialportglobal.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QSocketNotifier \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qsocketnotifier.h \
  /home/seame2026/piracer/Dashboard/src/utils/DataProcessor.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QDateTime \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qdatetime.h \

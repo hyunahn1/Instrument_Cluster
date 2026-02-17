@@ -47,6 +47,8 @@ private:
     
     float m_speed;
     float m_needleAngle;
+    float m_lastTargetAngle;
+    bool m_startupAnimationDone;
     QPropertyAnimation *m_needleAnimation;
     
     // Constants

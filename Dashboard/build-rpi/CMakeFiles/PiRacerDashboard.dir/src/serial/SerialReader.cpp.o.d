@@ -256,28 +256,48 @@ CMakeFiles/PiRacerDashboard.dir/src/serial/SerialReader.cpp.o: \
  /usr/include/c++/14/ratio /usr/include/c++/14/cstdint \
  /usr/include/c++/14/limits /usr/include/c++/14/ctime \
  /usr/include/c++/14/bits/parse_numbers.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/QSerialPort \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialport.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qiodevice.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialportglobal.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QTimer \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qtimer.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qbasictimer.h \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/QSerialPortInfo \
- /usr/include/aarch64-linux-gnu/qt5/QtSerialPort/qserialportinfo.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/QRegularExpression \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qregularexpression.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qshareddata.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qhash.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariant.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qmap.h \
- /usr/include/c++/14/variant \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qobject.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/QSocketNotifier \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qsocketnotifier.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QDebug \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qdebug.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qhash.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qmap.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qtextstream.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qiodevice.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qlocale.h \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qvariant.h \
+ /usr/include/c++/14/variant \
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qshareddata.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qset.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qsharedpointer.h \
- /usr/include/aarch64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
+ /usr/include/aarch64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h \
+ /usr/include/c++/14/cstring /usr/include/aarch64-linux-gnu/sys/socket.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/aarch64-linux-gnu/bits/socket.h \
+ /usr/include/aarch64-linux-gnu/bits/socket_type.h \
+ /usr/include/aarch64-linux-gnu/bits/sockaddr.h \
+ /usr/lib/linux/uapi/arm64/asm/socket.h /usr/include/asm-generic/socket.h \
+ /usr/lib/linux/uapi/arm64/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h \
+ /usr/include/aarch64-linux-gnu/sys/ioctl.h \
+ /usr/include/aarch64-linux-gnu/bits/ioctls.h \
+ /usr/lib/linux/uapi/arm64/asm/ioctls.h /usr/include/asm-generic/ioctls.h \
+ /usr/include/linux/ioctl.h /usr/lib/linux/uapi/arm64/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/aarch64-linux-gnu/bits/ioctl-types.h \
+ /usr/include/aarch64-linux-gnu/sys/ttydefaults.h /usr/include/unistd.h \
+ /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
+ /usr/include/aarch64-linux-gnu/bits/environments.h \
+ /usr/include/aarch64-linux-gnu/bits/confname.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
+ /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/net/if.h \
+ /usr/include/linux/can.h /usr/include/linux/socket.h \
+ /usr/include/linux/can/raw.h

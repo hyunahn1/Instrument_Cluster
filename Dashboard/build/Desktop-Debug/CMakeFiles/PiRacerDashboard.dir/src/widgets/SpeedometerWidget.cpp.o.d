@@ -308,8 +308,6 @@ CMakeFiles/PiRacerDashboard.dir/src/widgets/SpeedometerWidget.cpp.o: \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qpainterpath.h \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/QFont \
  /usr/include/aarch64-linux-gnu/qt5/QtGui/qfont.h \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/QFontDatabase \
- /usr/include/aarch64-linux-gnu/qt5/QtGui/qfontdatabase.h \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/QtMath \
  /usr/include/aarch64-linux-gnu/qt5/QtCore/qmath.h \
  /usr/include/c++/14/cmath /usr/include/math.h \

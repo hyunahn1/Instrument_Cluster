@@ -23,6 +23,8 @@ class RpmGauge;
 class BatteryWidget;
 class SerialReader;
 class DataProcessor;
+class QGraphicsOpacityEffect;
+class QParallelAnimationGroup;
 
 /**
  * @class MainWindow
@@ -52,6 +54,9 @@ private:
     void setupConnections();
     void setupPythonBridge();
     void applyStyles();
+    void applyDynamicBackgroundTheme(const QString &mode);
+    void animateCenterMode(const QString &newMode);
+    bool updateDirectionFromSnapshot();
     void updateDirectionIndicators();
     void applyDirectionIndicatorStyle(QLabel *label, bool active, const QString &activeColor);
     
@@ -78,15 +83,18 @@ private:
     float m_maxSpeed;
     float m_currentSpeed;
     QString m_driveDirection;
+    QString m_lastCenterMode;
+    QGraphicsOpacityEffect *m_centerModeOpacity;
+    QParallelAnimationGroup *m_centerModeAnim;
     QTimer *m_elapsedTimer;
     qint64 m_startTime;
     
     // Constants
     static constexpr int WINDOW_WIDTH = 1200;
     static constexpr int WINDOW_HEIGHT = 400;
-    static constexpr int LEFT_PANEL_WIDTH = 300;
-    static constexpr int CENTER_PANEL_WIDTH = 600;
-    static constexpr int RIGHT_PANEL_WIDTH = 300;
+    static constexpr int LEFT_PANEL_WIDTH = 260;
+    static constexpr int CENTER_PANEL_WIDTH = 560;
+    static constexpr int RIGHT_PANEL_WIDTH = 240;
 };
 
 #endif // MAINWINDOW_H

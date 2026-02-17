@@ -9,6 +9,7 @@
 #define RPMGAUGE_H
 
 #include <QWidget>
+#include <QPropertyAnimation>
 
 /**
  * @class RpmGauge
@@ -22,12 +23,15 @@
 class RpmGauge : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(float needleAngle READ needleAngle WRITE setNeedleAngle)
 
 public:
     explicit RpmGauge(QWidget *parent = nullptr);
     
     void setRPM(float rpm);
     float rpm() const { return m_rpm; }
+    float needleAngle() const { return m_needleAngle; }
+    void setNeedleAngle(float angle);
     
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -37,8 +41,11 @@ private:
     void drawValue(QPainter *painter);
     
     float m_rpm;
+    float m_needleAngle;
+    QPropertyAnimation *m_needleAnimation;
     
-    static constexpr float MAX_RPM = 500.0f;
+    // Dashboard display range tuned for current wheel RPM signal.
+    static constexpr float MAX_RPM = 120.0f;
 };
 
 #endif // RPMGAUGE_H
